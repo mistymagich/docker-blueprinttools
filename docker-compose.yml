@@ -1,0 +1,7 @@
+blueprint:
+    build: .
+    ports:
+        - "8080:8080"
+        - "8888:8888"
+    volumes:
+        - /vagrant/docs:/blueprint
