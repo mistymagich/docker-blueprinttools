@@ -45,6 +45,6 @@ SCRIPT
    config.vm.provision "shell", inline: $docker_compose_install_script 
 
   # docker run
-  # config.vm.provision "shell",
-  #   inline: "docker-compose -f /vagrant/docker-compose.yml up -d"
+  config.vm.provision "shell",
+    inline: "docker-compose -f /vagrant/docker-compose.yml up -d"
 end
