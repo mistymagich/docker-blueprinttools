@@ -1,7 +1,11 @@
-blueprint:
+tools:
     build: .
     ports:
         - "8080:8080"
         - "8888:8888"
+    # blueprint document folder path
     volumes:
-        - /vagrant/docs:/blueprint
+        - /vagrant/sample:/blueprint
+    # index page filename
+    environment:
+        BLUEPRINT_TOOLS_DOC_INDEX: index.md

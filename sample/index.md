@@ -27,7 +27,8 @@ Delete a message. **Warning:** This action **permanently** removes the message f
 
 + Response 204
 
-
 # Group Hello
 
-<!-- include(1_include.md) -->
+<!-- include(include.md) -->
+
+<!-- include(subdirectory/subinclude.md) -->

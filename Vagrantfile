@@ -37,14 +37,14 @@ Vagrant.configure(2) do |config|
   end
 
   # install docker compose
-   $docker_compose_install_script = <<SCRIPT
-   mkdir -p /opt/bin
-   curl -sL https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /opt/bin/docker-compose
-   chmod +x /opt/bin/docker-compose
+  $docker_compose_install_script = <<SCRIPT
+    mkdir -p /opt/bin
+    curl -sL https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` > /opt/bin/docker-compose
+    chmod +x /opt/bin/docker-compose
 SCRIPT
-   config.vm.provision "shell", inline: $docker_compose_install_script 
+  config.vm.provision "shell", inline: $docker_compose_install_script 
 
   # docker run
   config.vm.provision "shell",
-    inline: "docker-compose -f /vagrant/docker-compose.yml up -d"
+    inline: "docker-compose -f /vagrant/docker-compose.yml -p 'blueprint' up -d"
 end

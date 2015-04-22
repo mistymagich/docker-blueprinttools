@@ -9,8 +9,11 @@ RUN npm install -g drakov dredd aglio
 
 ## Make dummy file
 RUN mkdir -p /blueprint
-COPY docs/ /blueprint/
 
+## ENV
+ENV BLUEPRINT_TOOLS_DOC_INDEX index.md
+
+## entrypoint]
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 

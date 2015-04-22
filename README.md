@@ -10,24 +10,23 @@
 ```bash
 git clone https://github.com/mistymagich/docker-blueprinttools.git
 cd docker-blueprinttools
-docker build -t blueprinttools .
+docker build -t blueprint_tools .
 ```
 
 ## run container
 
 ```bash
-docker run -it -p 8080:8080 -p 8888:8888 -v [blueprint document directory]:/blueprint blueprinttools
+docker run \
+    -it \
+    -p 8080:8080 \
+    -p 8888:8888 \
+    -v [blueprint document directory]:/blueprint \
+    (-e BLUEPRINT_TOOLS_DOC_INDEX=index.md \ )
+    blueprint_tools
 ```
 
-[blueprint document directory] - your blueprint documents folder
-
-e.g.
-
-```bash
-git clone https://github.com/apiaryio/api-blueprint.git
-cp api-blueprint/examples/Real\ World\ API.md .
-docker run -it -p 8080:8080 -p 8888:8888 -v `pwd`:/blueprint blueprinttools
-```
+* **[blueprint document directory]** - required, blueprint document folder path
+* **BLUEPRINT_TOOLS_DOC_INDEX** - optional, index page filename (default: index.md)
 
 ## access container
 
@@ -37,22 +36,34 @@ http://127.0.0.1:8888 -  aglio
 
 http://127.0.0.1:8080 - drakov
 
-
-![http://127.0.0.1:8080/messages/hello](https://raw.githubusercontent.com/mistymagich/docker-blueprinttools/master/pic/drakov_get_message.png)
-
-![http://127.0.0.1:8080/hello](https://raw.githubusercontent.com/mistymagich/docker-blueprinttools/master/pic/drakov_get_hello.png)
+![http://127.0.0.1:8080/notes](https://raw.githubusercontent.com/mistymagich/docker-blueprinttools/master/pic/drakov_sample.png)
 
 
-## use Vagrant
+## example
+
+### single blueprint document
+
+```bash
+git clone https://github.com/apiaryio/api-blueprint.git
+cp api-blueprint/examples/Real\ World\ API.md index.md
+docker run -it -p 8080:8080 -p 8888:8888 -v `pwd`:/blueprint blueprint_tools
+```
+
+### use BLUEPRINT_TOOLS_DOC_INDEX and multiple files
+
+```bash
+git clone https://github.com/danielgtaylor/aglio
+docker run -it -p 8080:8080 -p 8888:8888 -v `pwd`/aglio:/blueprint -e "BLUEPRINT_TOOLS_DOC_INDEX=example.md" blueprint_tools
+```
+
+## use Vagrant (optional)
 
 ### requirements
 
 * [VirtualBox](https://www.virtualbox.org)
 * [Vagrant](https://www.vagrantup.com)
-* Vagrantプラグイン
-
+* Vagrant plug-in
 	* [Vagrant Host Manager](https://github.com/smdahlen/vagrant-hostmanager)
-
 	  ```
 	  vagrant plugin install vagrant-hostmanager
 	  ```
@@ -62,8 +73,13 @@ http://127.0.0.1:8080 - drakov
 ```bash
 git clone https://github.com/mistymagich/docker-blueprinttools.git
 cd docker-blueprinttools
+```
+
+edit **docker-compose.yml** for folder path and index filename.
+(currecnt directory mounted '/vagrant' at guest OS.)
+
+```bash
 vagrant up
 ```
 
-access http://blueprint.local:8080,http://blueprint.local:8888
-
+access http://blueprint.local:8080 and http://blueprint.local:8888
