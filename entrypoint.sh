@@ -9,4 +9,4 @@ if [ ! -f "${BLUEPRINT_TOOLS_DOC_INDEX}" ]; then
 fi
 
 aglio -i ${BLUEPRINT_TOOLS_DOC_INDEX} -s -h 0.0.0.0 -p 8888 &
-drakov -f '**/*.md' -p 8080
+drakov -f '**/*.md' -p 8080 --public
