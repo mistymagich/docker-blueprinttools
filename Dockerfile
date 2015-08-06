@@ -19,3 +19,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 8080 8888
 VOLUME ["/blueprint"]
+
+# clear
+RUN apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* 
